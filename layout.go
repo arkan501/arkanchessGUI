@@ -2,23 +2,20 @@ package main
 
 import (
 	"fyne.io/fyne/v2"
-    "fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/theme"
 )
 
-type chessLayout struct {
-    boardImage *canvas.Image
-}
+type chessLayout struct{}
 
 func (c *chessLayout) Layout(cells []fyne.CanvasObject, size fyne.Size) {
-    squareSize := fyne.Min(size.Width, size.Height) / 8
-    totalSize := squareSize * 8
-    offsetx := (size.Width - totalSize) / 2
-    offsety := (size.Height - totalSize) / 2
+	squareSize := fyne.Min(size.Width, size.Height) / 8
+	totalSize := squareSize * 8
+	offsetx := (size.Width - totalSize) / 2
+	offsety := (size.Height - totalSize) / 2
 
 	for ix, piece := range cells {
-		x := float32(ix%8) * squareSize + offsetx
-		y := float32(ix/8) * squareSize + offsety
+		x := float32(ix%8)*squareSize + offsetx
+		y := float32(ix/8)*squareSize + offsety
 		piece.Resize(fyne.NewSize(squareSize, squareSize))
 		piece.Move(fyne.NewPos(x, y))
 	}
@@ -29,7 +26,3 @@ func (b *chessLayout) MinSize([]fyne.CanvasObject) fyne.Size {
 	edge := theme.IconInlineSize() * 8
 	return fyne.NewSize(edge, edge)
 }
-
-// func (b *chessLayout) MaxSize([]fyne.CanvasObject) fyne.Size {
-//	return b.boardImage.Size()
-// }

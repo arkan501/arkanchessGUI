@@ -1,7 +1,5 @@
 package main
 
-import p "gitlab.com/Arkan501/arkanchesslib/pieces"
-
 // couldn't think of something better
 
 var indexToSquare = map[int]int{
@@ -69,25 +67,4 @@ var indexToSquare = map[int]int{
 	61: 76,
 	62: 77,
 	63: 78,
-}
-
-var pieceDir = "resources/piece_sets/pieces-basic-svg/"
-
-var pieceToImage = map[p.Colour]map[p.PieceType]string{
-	p.White: {
-		p.Pawn:   pieceDir + "pawn-w.svg",
-		p.Knight: pieceDir + "knight-w.svg",
-		p.Bishop: pieceDir + "bishop-w.svg",
-		p.Rook:   pieceDir + "rook-w.svg",
-		p.Queen:  pieceDir + "queen-w.svg",
-		p.King:   pieceDir + "king-w.svg",
-	},
-	p.Black: {
-		p.Pawn:   pieceDir + "pawn-b.svg",
-		p.Knight: pieceDir + "knight-b.svg",
-		p.Bishop: pieceDir + "bishop-b.svg",
-		p.Rook:   pieceDir + "rook-b.svg",
-		p.Queen:  pieceDir + "queen-b.svg",
-		p.King:   pieceDir + "king-b.svg",
-	},
 }

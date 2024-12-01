@@ -1,45 +1,40 @@
 package main
 
 import (
-	"image/color"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
-	"fyne.io/fyne/v2/container"
 	b "gitlab.com/Arkan501/arkanchesslib/board"
+	p "gitlab.com/Arkan501/arkanchesslib/pieces"
 )
 
 func main() {
 	myApp := app.New()
 	w := myApp.NewWindow("arkanchess GUI")
-    chessBoard := b.NewBoard()
+	chessBoard := b.NewBoard()
 
-	board := createBoard(&chessBoard)
-
+	board := guiBoard(&chessBoard)
 	w.SetContent(board)
 	w.Resize(fyne.NewSize(800, 800))
+
+	go func() {
+		turn := p.White
+		for chessBoard.GameState(turn) == 0 {
+			movePiece(turn, &chessBoard, board)
+			switch turn {
+			case p.White:
+				turn = p.Black
+			case p.Black:
+				turn = p.White
+			}
+		}
+	}()
+
 	w.ShowAndRun()
 }
 
-func createBoard(board *b.Board) *fyne.Container {
-	var cells []fyne.CanvasObject
-    boardImage := canvas.NewImageFromFile("resources/board/aqua.svg")
-    boardImage.FillMode = canvas.ImageFillOriginal
-
-	for ix := 0; ix < 64; ix++ {
-        boardPiece, err := board.GetPieceAt(indexToSquare[ix])
-        if err != nil {
-            cells = append(cells, canvas.NewRectangle(color.Transparent))
-        } else {
-            piece :=
-            canvas.NewImageFromFile(
-            pieceToImage[boardPiece.Colour()][boardPiece.Type()],
-            )
-            piece.FillMode = canvas.ImageFillContain
-            cells = append(cells, piece)
-        }
-	}
-
-	return container.NewStack(boardImage, container.New(&chessLayout{}, cells...))
+func movePiece(colour p.Colour, board *b.Board, guiBoard *fyne.Container) {
+	var from int
+	var to int
+	board.MakeMove(colour, from, to)
+	refreshBoard(guiBoard)
 }
