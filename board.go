@@ -7,13 +7,15 @@ import (
 	b "gitlab.com/Arkan501/arkanchesslib/board"
 )
 
+var boarDir = "resources/board/"
+
 func guiBoard(board *b.Board) *fyne.Container {
 	var cells []fyne.CanvasObject
-	boardImage := canvas.NewImageFromFile("resources/board/aqua.svg")
+	boardImage := canvas.NewImageFromFile(boarDir + "aqua.svg")
 	boardImage.FillMode = canvas.ImageFillOriginal
 
 	for ix := 0; ix < 64; ix++ {
-		boardPiece, err := board.GetPieceAt(indexToSquare[ix])
+		boardPiece, err := board.GetPieceFrom(indexToSquare[ix])
 		if err != nil {
 			emptySquare := emptySquare(ix)
 			cells = append(cells, emptySquare)
@@ -33,9 +35,19 @@ func guiBoard(board *b.Board) *fyne.Container {
 	)
 }
 
-func refreshBoard(pieceGrid *fyne.Container) {
-	for _, cell := range pieceGrid.Objects {
-		image := cell
-		image.Refresh()
+func refreshBoard(pieceGrid *fyne.Container, chessBoard *b.Board) {
+	for ix := range pieceGrid.Objects {
+		piece, err := chessBoard.GetPieceFrom(indexToSquare[ix])
+		if err != nil {
+			emptySquare := emptySquare(ix)
+			pieceGrid.Objects[ix] = emptySquare
+		} else {
+			pieceUI := NewUIPiece(piece)
+			pieceUI.origin = ix
+			pieceCombo := container.NewStack(pieceUI.Image, pieceUI)
+			pieceGrid.Objects[ix] = pieceCombo
+		}
 	}
+
+	pieceGrid.Refresh()
 }

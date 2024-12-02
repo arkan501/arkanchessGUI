@@ -285,10 +285,10 @@ github.com/yuin/goldmark v1.3.5/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1
 github.com/yuin/goldmark v1.4.0/go.mod h1:mwnBkeHKe2W/ZEtQ+71ViKU8L12m81fl3OWwC1Zlc8k=
 github.com/yuin/goldmark v1.7.1 h1:3bajkSilaCbjdKVsKdZjZCLBNPL9pYzrCakKaf4U49U=
 github.com/yuin/goldmark v1.7.1/go.mod h1:uzxRWxtg69N339t3louHJ7+O03ezfj6PlliRlaOzY1E=
-gitlab.com/Arkan501/arkanchesslib v0.0.0-20241125213228-cfb4db7221ae h1:5uwtedm/W99fdJVOpyGFHRkdFd2vQ6AU3hl1CyOD3pw=
-gitlab.com/Arkan501/arkanchesslib v0.0.0-20241125213228-cfb4db7221ae/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
-gitlab.com/Arkan501/arkanchesslib v0.0.0-20241126200211-9189a9c57d3f h1:682nyabvosmJIubLUYbQ3l5flD11Np5ef95vXH5CJ7Q=
-gitlab.com/Arkan501/arkanchesslib v0.0.0-20241126200211-9189a9c57d3f/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241202041614-213e6f4c000c h1:7MyM0mAuLdzWPy2WSiuH31gY9CEJSka1SWMJ1Dl7Zs0=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241202041614-213e6f4c000c/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241202150623-5c6c29dbf58d h1:U/AM2dpHO2S2BcbSn86brL+MvRbpfRTh92vUicquWHQ=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241202150623-5c6c29dbf58d/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
 go.etcd.io/etcd/client/pkg/v3 v3.5.0/go.mod h1:IJHfcCEKxYu1Os13ZdwCwIUTUVGYTSAM3YSwc9/Ac1g=
 go.etcd.io/etcd/client/v2 v2.305.0/go.mod h1:h9puh54ZTgAKtEbut2oe9P4L/oqKCVB6xsXlzd7alYQ=
