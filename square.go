@@ -6,11 +6,10 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
-	"gitlab.com/Arkan501/arkanchesslib/board"
+	ac "gitlab.com/Arkan501/arkanchesslib"
 )
 
-var targetSquare = -29
-
+var targetSquare int
 type square struct {
 	*canvas.Rectangle
 	origin   int
@@ -25,7 +24,7 @@ func emptySquare(origin int) *square {
 
 func (sq *square) Tapped(ev *fyne.PointEvent) {
 	log.Println("Tapped square", sq.origin)
-    if board.WithinBounds(pieceIndex) {
+    if ac.WithinBounds(indexToSquare[pieceIndex]) {
         targetSquare = sq.origin
     }
 }
