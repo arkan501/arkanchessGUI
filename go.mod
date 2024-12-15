@@ -4,7 +4,7 @@ go 1.23.3
 
 require (
 	fyne.io/fyne/v2 v2.5.2
-	gitlab.com/Arkan501/arkanchesslib v0.0.0-20241209234219-bb01522037d6
+	gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213212404-e38a67fcbcc5
 )
 
 require (

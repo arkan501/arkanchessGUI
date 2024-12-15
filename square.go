@@ -2,14 +2,12 @@ package main
 
 import (
 	"image/color"
-	"log"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	ac "gitlab.com/Arkan501/arkanchesslib"
 )
 
-var targetSquare int
 type square struct {
 	*canvas.Rectangle
 	origin   int
@@ -23,9 +21,9 @@ func emptySquare(origin int) *square {
 }
 
 func (sq *square) Tapped(ev *fyne.PointEvent) {
-	log.Println("Tapped square", sq.origin)
     if ac.WithinBounds(indexToSquare[pieceIndex]) {
         targetSquare = sq.origin
+        moveReady <- true
     }
 }
 

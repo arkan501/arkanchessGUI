@@ -1,12 +1,15 @@
 package main
 
 import (
-	"log"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-    ac "gitlab.com/Arkan501/arkanchesslib"
+	// "fyne.io/fyne/v2/container"
+	ac "gitlab.com/Arkan501/arkanchesslib"
 )
+
+var pieceIndex = -29
+var targetSquare = -29
+var moveReady = make(chan bool)
 
 func main() {
 	myApp := app.New()
@@ -17,42 +20,38 @@ func main() {
 	w.SetContent(guiBoard)
 	w.Resize(fyne.NewSize(800, 800))
 
-	moveBoolChan := make(chan bool)
-    // moveChan := make(chan ac.Move)
-    
-	// This is to constantly check if these values have been set or not
-	 go func() {
-	 	for {
-	 		if pieceIndex != targetSquare &&
-	 			ac.WithinBounds(indexToSquare[pieceIndex]) &&
-	 			ac.WithinBounds(indexToSquare[targetSquare]) {
-	 			moveBoolChan <- true
-			}
-	 	}
-	 }()
-
 	// the game loop needs to run concurrently with the gui
-	go func() {
-		for chessBoard.GameState(chessBoard.SideToMove) == 0 {
-			log.Printf("turn: %v\n", chessBoard.SideToMove)
-			log.Println("executing movePiece function")
-			<-moveBoolChan
-			movePiece(&chessBoard, guiBoard.Objects[1].(*fyne.Container))
-			log.Println("piece was moved on board")
-
-			pieceIndex = -29
-			targetSquare = -29
-		}
-	}()
+	go gameEngine(&chessBoard, guiBoard)
 
 	w.ShowAndRun()
 }
 
-func movePiece(board *ac.BoardState, pieceGrid *fyne.Container) {
-    move := ac.Move{
-        FromSquare: indexToSquare[pieceIndex],
-        ToSquare: indexToSquare[targetSquare],
-    }
-    board.MakeMove(move)
-	refreshBoard(pieceGrid, board)
+func gameEngine(chessBoard *ac.BoardState, guiBoard *fyne.Container) {
+	for chessBoard.GameState() == 0 {
+		ready := make(chan bool)
+		move := ac.Move{}
+		<-moveReady
+		go chooseMove(ready, &move)
+        <-ready
+        // if chessBoard.CanPromote(chessBoard.SideToMove, move.ToSquare) {
+        //     move.Promotion = selectPromotion(chessBoard, guiBoard)
+        // }
+		chessBoard.MakeMove(move)
+        refreshBoard(guiBoard.Objects[1].(*fyne.Container), chessBoard)
+        pieceIndex = -29
+        targetSquare = -29
+	}
 }
+
+func chooseMove(ready chan bool, move *ac.Move) {
+	move.FromSquare = indexToSquare[pieceIndex]
+	move.ToSquare = indexToSquare[targetSquare]
+	ready <- true
+}
+
+// func selectPromotion(chessBoard *ac.BoardState, guiBoard *fyne.Container) ac.PieceType {
+//     var choice ac.PieceType
+//     selection := container.NewVBox()
+// 
+//     return choice
+// }

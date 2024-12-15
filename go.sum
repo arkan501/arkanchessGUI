@@ -297,6 +297,12 @@ gitlab.com/Arkan501/arkanchesslib v0.0.0-20241207124537-2db3735b8f2e h1:ghi0oqQz
 gitlab.com/Arkan501/arkanchesslib v0.0.0-20241207124537-2db3735b8f2e/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
 gitlab.com/Arkan501/arkanchesslib v0.0.0-20241209234219-bb01522037d6 h1:X35Tgnkqjvw3WveKfQiTbLsmYtv02RDFsZhsTJF6R4A=
 gitlab.com/Arkan501/arkanchesslib v0.0.0-20241209234219-bb01522037d6/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213002124-07472743239c h1:lTV2uF3cd3gtFKst2yuX9lKLNWwG4avvVWozKSFGUbI=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213002124-07472743239c/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213170659-cc0cc106262a h1:1RH200RkAZlNoYF5zhvH+4yYac6Ha7Xb+vToRylH760=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213170659-cc0cc106262a/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213212404-e38a67fcbcc5 h1:qve+8XvmN/w4lQt3AfmybyphO8T1x4W5i1bROe6ej/I=
+gitlab.com/Arkan501/arkanchesslib v0.0.0-20241213212404-e38a67fcbcc5/go.mod h1:R+wlmNQ8ve5zMm59OR8WonCIhvh2k9lfjiaQUNsV36k=
 go.etcd.io/etcd/api/v3 v3.5.0/go.mod h1:cbVKeC6lCfl7j/8jBhAK6aIYO9XOjdptoxU/nLQcPvs=
 go.etcd.io/etcd/client/pkg/v3 v3.5.0/go.mod h1:IJHfcCEKxYu1Os13ZdwCwIUTUVGYTSAM3YSwc9/Ac1g=
 go.etcd.io/etcd/client/v2 v2.305.0/go.mod h1:h9puh54ZTgAKtEbut2oe9P4L/oqKCVB6xsXlzd7alYQ=

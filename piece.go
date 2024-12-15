@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 
@@ -32,17 +30,16 @@ var (
 	}
 )
 
-var pieceIndex = -29
 
 type UIPiece struct {
 	*canvas.Image
 	// *widget.Icon
 	boardState *ac.BoardState
-	piece      ac.IPiece
+	piece      ac.ChessPiece
 	origin     int
 }
 
-func NewUIPiece(chessBoard *ac.BoardState, piece ac.IPiece) *UIPiece {
+func NewUIPiece(chessBoard *ac.BoardState, piece ac.ChessPiece) *UIPiece {
 	pieceImage :=
 		canvas.NewImageFromFile(pieceToImage[piece.Colour()][piece.Type()])
 	pieceImage.FillMode = canvas.ImageFillContain
@@ -57,7 +54,6 @@ func NewUIPiece(chessBoard *ac.BoardState, piece ac.IPiece) *UIPiece {
 }
 
 func (uiPiece *UIPiece) Tapped(ev *fyne.PointEvent) {
-	log.Println("Tapped piece", uiPiece.origin)
 	if !ac.WithinBounds(indexToSquare[pieceIndex]) {
 		pieceIndex = uiPiece.origin
 		return
@@ -69,6 +65,7 @@ func (uiPiece *UIPiece) Tapped(ev *fyne.PointEvent) {
         pieceIndex = uiPiece.origin
     } else {
         targetSquare = uiPiece.origin
+        moveReady <- true
     }
 }
 
