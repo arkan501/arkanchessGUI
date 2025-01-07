@@ -10,25 +10,26 @@ import (
 
 type square struct {
 	*canvas.Rectangle
-	origin   int
+	boardState *ac.BoardState
+	grid       *fyne.Container
+	parentWin  *fyne.Window
+	origin     int
 }
 
-func emptySquare(origin int) *square {
+func emptySquare(boardState *ac.BoardState, grid *fyne.Container, parentWin *fyne.Window, origin int) *square {
 	return &square{
-		Rectangle: canvas.NewRectangle(color.Transparent),
-		origin:    origin,
+		Rectangle:  canvas.NewRectangle(color.Transparent),
+		boardState: boardState,
+		grid:       grid,
+        parentWin: parentWin,
+		origin:     origin,
 	}
 }
 
 func (sq *square) Tapped(ev *fyne.PointEvent) {
-    if ac.WithinBounds(indexToSquare[pieceIndex]) {
-        targetSquare = sq.origin
-        moveReady <- true
-    }
-}
-
-// not sure if the draggable interface is necessary or not.
-func (sq *square) Dragged(ev *fyne.DragEvent) {}
-
-func (sq *square) DragEnd() {
+	if ac.WithinBounds(index_Square[pieceIndex]) {
+		targetSquare = sq.origin
+		myMove := &ac.Move{}
+		chooseMove(myMove, sq.boardState, sq.grid, sq.parentWin)
+	}
 }

@@ -7,45 +7,48 @@ import (
 	ac "gitlab.com/Arkan501/arkanchesslib"
 )
 
-var boarDir = "resources/board/"
+var boardDir = "resources/board/"
 
-func guiBoard(chessBoard *ac.BoardState) *fyne.Container {
+func guiBoard(chessBoard *ac.BoardState, parentWin *fyne.Window) *fyne.Container {
 	var cells []fyne.CanvasObject
-	boardImage := canvas.NewImageFromFile(boarDir + "aqua.svg")
+	pieceGrid := container.New(&chessLayout{})
+	boardImage := canvas.NewImageFromFile(boardDir + "aqua.svg")
 	boardImage.FillMode = canvas.ImageFillOriginal
 
 	for ix := 0; ix < 64; ix++ {
-		boardPiece, err := chessBoard.GetPieceFrom(indexToSquare[ix])
+		boardPiece, err := chessBoard.GetPieceFrom(index_Square[ix])
 		if err != nil {
-			emptySquare := emptySquare(ix)
+			emptySquare := emptySquare(chessBoard, pieceGrid, parentWin, ix)
 			cells = append(cells, emptySquare)
 		} else {
-			piece := NewUIPiece(chessBoard, boardPiece)
-			piece.origin = ix
+			piece := NewUIPiece(boardPiece, chessBoard, pieceGrid, parentWin, ix)
 			pieceCombo := container.NewStack(piece.Image, piece)
 			cells = append(cells, pieceCombo)
 		}
 	}
 
+	pieceGrid.Objects = cells
+
 	return container.NewStack(
 		boardImage,
-		container.New(&chessLayout{}, cells...),
+		pieceGrid,
 	)
 }
 
-func refreshBoard(pieceGrid *fyne.Container, chessBoard *ac.BoardState) {
-	for ix := range pieceGrid.Objects {
-		piece, err := chessBoard.GetPieceFrom(indexToSquare[ix])
-		if err != nil {
-			emptySquare := emptySquare(ix)
-			pieceGrid.Objects[ix] = emptySquare
-		} else {
-			pieceUI := NewUIPiece(chessBoard, piece)
-			pieceUI.origin = ix
-			pieceCombo := container.NewStack(pieceUI.Image, pieceUI)
-			pieceGrid.Objects[ix] = pieceCombo
+func refreshBoard(pieceGrid *fyne.Container, chessBoard *ac.BoardState, parentWin *fyne.Window) {
+	go func() {
+		for ix := range pieceGrid.Objects {
+			piece, err := chessBoard.GetPieceFrom(index_Square[ix])
+			if err != nil {
+				emptySquare := emptySquare(chessBoard, pieceGrid, parentWin, ix)
+				pieceGrid.Objects[ix] = emptySquare
+			} else {
+				uiPiece := NewUIPiece(piece, chessBoard, pieceGrid, parentWin, ix)
+				pieceCombo := container.NewStack(uiPiece.Image, uiPiece)
+				pieceGrid.Objects[ix] = pieceCombo
+			}
 		}
-	}
+	}()
 
 	pieceGrid.Refresh()
 }

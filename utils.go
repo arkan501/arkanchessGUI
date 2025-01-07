@@ -2,7 +2,7 @@ package main
 
 // couldn't think of something better
 
-var indexToSquare = map[int]int{
+var index_Square = map[int]int{
 	0:  1,
 	1:  2,
 	2:  3,
